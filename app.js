@@ -1,68 +1,72 @@
-// El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
 // 1. Crear un array para almacenar los nombres de los amigos
 document.addEventListener('DOMContentLoaded', function() {
+  let amigos = [];
 
-let amigos = [];
+  // 2. Función para agregar amigos
+  function agregarAmigo() {
+      const inputNombre = document.querySelector('#amigo');
+      if (!inputNombre) {
+          console.error('El elemento con id "amigo" no existe en el DOM.');
+          return;
+      }
+      const nombre = inputNombre.value.trim();
 
-// 2. Función para agregar amigos
-function agregarAmigo() {
-  // Capturar el valor del campo de entrada
-  const inputNombre = document.querySelector('#amigo');
-  const nombre = inputNombre.value.trim();
+      if (nombre === '') {
+          alert('Por favor, inserte un nombre.');
+          return;
+      }
 
-  // Validar la entrada
-  if (nombre === '') {
-    alert('Por favor, inserte un nombre.');
-    return;
+      amigos.push(nombre);
+      inputNombre.value = '';
+      actualizarLista();
   }
 
-  // Actualizar el array de amigos
-  amigos.push(nombre);
+  // 3. Función para actualizar la lista de amigos en el HTML
+  function actualizarLista() {
+      const listaNombres = document.querySelector('#listaAmigos');
+      if (!listaNombres) {
+          console.error('El elemento con id "listaAmigos" no existe en el DOM.');
+          return;
+      }
+      listaNombres.innerHTML = '';
 
-  // Limpiar el campo de entrada
-  inputNombre.value = '';
-
-  // Actualizar la lista visual en el HTML
-  actualizarLista();
-}
-
-// 3. Función para actualizar la lista de amigos en el HTML
-function actualizarLista() {
-  // Obtener el elemento de la lista
-  const listaNombres = document.querySelector('#listaAmigos');
-
-  // Limpiar la lista existente
-  listaNombres.innerHTML = '';
-
-  // Iterar sobre el arreglo y agregar elementos a la lista
-  amigos.forEach((amigo) => {
-    const li = document.createElement('li');
-    li.textContent = amigo;
-    listaNombres.appendChild(li);
-  });
-}
-
-// 4. Función para sortear un amigo
-function sortearAmigo() {
-  // Validar que haya amigos disponibles
-  if (amigos.length === 0) {
-    alert('La lista está vacía. Agregue al menos un nombre.');
-    return;
+      amigos.forEach((amigo) => {
+          const li = document.createElement('li');
+          li.textContent = amigo;
+          listaNombres.appendChild(li);
+      });
   }
 
-  // Generar un índice aleatorio
-  const indiceAleatorio = Math.floor(Math.random() * amigos.length);
+  // 4. Función para sortear un amigo
+  function sortearAmigo() {
+      if (amigos.length === 0) {
+          alert('La lista está vacía. Agregue al menos un nombre.');
+          return;
+      }
 
-  // Obtener el nombre sorteado
-  const nombreSorteado = amigos[indiceAleatorio];
+      const indiceAleatorio = Math.floor(Math.random() * amigos.length);
+      const nombreSorteado = amigos[indiceAleatorio];
 
-  // Mostrar el resultado
-  const resultado = document.querySelector('#resultado');
-  resultado.textContent = `El amigo secreto es: ${nombreSorteado}`;
-}
+      const resultado = document.querySelector('#resultado');
+      if (resultado) {
+          resultado.textContent = `El amigo secreto es: ${nombreSorteado}`;
+      } else {
+          console.error('El elemento con id "resultado" no existe en el DOM.');
+      }
+  }
 
-// 5. Asignar eventos a los botones
-document.querySelector('.button-add').addEventListener('click', agregarAmigo);
-document.querySelector('.button-draw').addEventListener('click', sortearAmigo);
+  // 5. Asignar eventos a los botones (fuera de las funciones)
+  const addButton = document.querySelector('.button-add');
+  if (addButton) {
+      addButton.addEventListener('click', agregarAmigo);
+  } else {
+      console.error('El botón con clase "button-add" no existe en el DOM.');
+  }
 
-});
+  const drawButton = document.querySelector('.button-draw');
+  if (drawButton) {
+      drawButton.addEventListener('click', sortearAmigo);
+  } else {
+      console.error('El botón con clase "button-draw" no existe en el DOM.');
+  }
+}); // ← Cierra correctamente el event listener aquí
