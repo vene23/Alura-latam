@@ -5,7 +5,7 @@ let amigos = [];
 // 2. Función para agregar amigos
 function agregarAmigo() {
   // Capturar el valor del campo de entrada
-  const inputNombre = document.querySelector('#inputNombre');
+  const inputNombre = document.querySelector('#amigo');
   const nombre = inputNombre.value.trim();
 
   // Validar la entrada
@@ -27,7 +27,7 @@ function agregarAmigo() {
 // 3. Función para actualizar la lista de amigos en el HTML
 function actualizarLista() {
   // Obtener el elemento de la lista
-  const listaNombres = document.querySelector('#listaNombres');
+  const listaNombres = document.querySelector('#listaAmigos');
 
   // Limpiar la lista existente
   listaNombres.innerHTML = '';
@@ -60,5 +60,5 @@ function sortearAmigo() {
 }
 
 // 5. Asignar eventos a los botones
-document.querySelector('#btnAdicionar').addEventListener('click', agregarAmigo);
-document.querySelector('#btnSortear').addEventListener('click', sortearAmigo);
+document.querySelector('.button-add').addEventListener('click', agregarAmigo);
+document.querySelector('.button-draw').addEventListener('click', sortearAmigo);
