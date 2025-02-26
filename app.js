@@ -1,5 +1,7 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
 // 1. Crear un array para almacenar los nombres de los amigos
+document.addEventListener('DOMContentLoaded', function() {
+
 let amigos = [];
 
 // 2. Función para agregar amigos
@@ -62,3 +64,5 @@ function sortearAmigo() {
 // 5. Asignar eventos a los botones
 document.querySelector('.button-add').addEventListener('click', agregarAmigo);
 document.querySelector('.button-draw').addEventListener('click', sortearAmigo);
+
+});
